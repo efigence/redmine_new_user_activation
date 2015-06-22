@@ -2,3 +2,4 @@
 en:
   # my_label: "My label"
   field_activation_date: Activation date
+  status_pending: pending

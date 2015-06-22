@@ -9,10 +9,21 @@ module RedmineNewUserActivation
 
           safe_attributes 'activation_date'
 
-        end
-      end
-    end
-  end
+          validate :activation_date_cannot_be_in_the_past
+
+          def activation_date_cannot_be_in_the_past
+            errors.add(:activation_date, "can't be in the past") if
+            !activation_date.blank? && activation_date < Date.today
+          end
+
+          def pending?
+           self.status == STATUS_PENDING
+         end
+
+       end
+     end
+   end
+ end
 end
 
 unless User.included_modules.include?(RedmineNewUserActivation::Patches::UserPatch)

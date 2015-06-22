@@ -10,4 +10,6 @@ end
 ActionDispatch::Callbacks.to_prepare do
   require 'redmine_new_user_activation/hooks/activation_date'
   require 'redmine_new_user_activation/patches/user_patch'
+  require 'redmine_new_user_activation/patches/users_helper_patch'
+  # require 'redmine_new_user_activation/patches/principal_patch'
 end
