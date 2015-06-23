@@ -11,7 +11,7 @@ class UserTest < ActiveSupport::TestCase
     assert_difference 'User.count', +1 do
       user = @user
       user.login = "new_user"
-      user.activation_date = "<%= Time.now+1.month %>"
+      user.activation_date = Time.now+1.year
       user.save
     end
   end
@@ -31,6 +31,25 @@ class UserTest < ActiveSupport::TestCase
       @user.activation_date = "2006-07-19 22:57:52 +02:00"
       @user.save
     end
+  end
+
+  def test_should_modify_activation_date_for_user_with_pending_status
+    user = @user
+    user.login = "new_user"
+    user.save
+    user.set_pending
+    user.activation_date = "2015-07-19 22:57:52 +02:00"
+
+    assert user.activation_date = "2015-07-19 22:57:52 +02:00"
+  end
+
+  def test_should_not_modify_activation_date_for_user_with_pending_status
+    user = @user
+    user.login = "new_user"
+    user.save
+    user.activation_date = "2015-07-19 22:57:52 +02:00"
+
+    assert user.activation_date = ""
   end
 
 end
