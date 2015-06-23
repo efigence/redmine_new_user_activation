@@ -11,6 +11,7 @@ module RedmineNewUserActivation
 
           validate :activation_date_cannot_be_in_the_past
           validate :activation_date_can_be_modified_only_for_pending_status, :on => :update
+          before_save :set_initial_status
 
           def activation_date_cannot_be_in_the_past
             errors.add(:activation_date, "should be later than today") if
@@ -33,6 +34,13 @@ module RedmineNewUserActivation
           def set_pending!
             update_attribute(:status, User::STATUS_PENDING)
           end
+
+          def set_initial_status
+            if self.activation_date
+              self.set_pending
+            end
+          end
+
         end
       end
 

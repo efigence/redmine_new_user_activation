@@ -1,7 +1,6 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class UserTest < ActiveSupport::TestCase
-  fixtures :users
 
   def setup
     @user = User.new(:firstname => "new", :lastname => "user", :mail => "newuser@somenet.foo")
@@ -43,13 +42,30 @@ class UserTest < ActiveSupport::TestCase
     assert user.activation_date = "2015-07-19 22:57:52 +02:00"
   end
 
-  def test_should_not_modify_activation_date_for_user_with_pending_status
+  def test_should_not_modify_activation_date_for_user_with_not_pending_status
     user = @user
     user.login = "new_user"
     user.save
     user.activation_date = "2015-07-19 22:57:52 +02:00"
 
     assert user.activation_date = ""
+  end
+
+  def test_should_set_status_to_pending_with_given_activation_date
+      user = @user
+      user.login = "new_user"
+      @user.activation_date = "2006-07-19 22:57:52 +02:00"
+      @user.save
+
+      assert user.status = "STATUS_PENDING"
+  end
+
+  def test_should_set_status_to_active_without_given_activation_date
+      user = @user
+      user.login = "new_user"
+      @user.save
+
+      assert user.status = "STATUS_ACTIVE"
   end
 
 end
