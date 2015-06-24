@@ -1,4 +1,4 @@
-# Redmine New User Activation plugin (work in progress)
+# Redmine New User Activation plugin [![Build Status](https://travis-ci.org/efigence/redmine_new_user_activation.svg?branch=master)](https://travis-ci.org/efigence/redmine_new_user_activation)
 
 #### Plugin which adds future activation date and pending status in model User in order to verify on daily basis if any accounts should be activated.
 
@@ -16,9 +16,19 @@ Developed and tested on Redmine 3.0.3.
 
 ## Usage
 
-* Admin defines activation date for a user
-* `sidekiq` worker scheduled by `clockwork` checks if there are any pending users with current activation date
+* Admin defines future activation date for a user, this user's status is set by default to STATUS_PENDING
+* `sidekiq` worker (see Sidekiq section below) scheduled by `clockwork` (see Clockwork section below) checks if there are any pending users with current activation date
 * If there are, worker changes their status to STATUS_ACTIVE
+
+## Sidekiq
+
+To use this plugin you must install and configure `sidekiq` first. To use `sidekiq` with redmine you should use `redmine_sidekiq` plugin. You can add it to redmine by following the instructions provided on its github page: https://github.com/ogom/redmine_sidekiq
+
+You can find more information about sidekiq [here](https://github.com/mperham/sidekiq).
+
+## Clockwork
+
+In `clockwork.rb` you can define how often should `sidekiq` be called to schedule locking accounts process. Default interval is set to 24 hours. You can read more about `clockwork` and its configuration [here](https://github.com/tomykaira/clockwork).
 
 
 ## License
