@@ -1,6 +1,6 @@
-# Redmine New User Activation plugin (work in progress - DO NOT USE)
+# Redmine New User Activation plugin (work in progress)
 
-#### Plugin which adds activation date in model User.
+#### Plugin which adds future activation date and pending status in model User in order to verify on daily basis if any accounts should be activated.
 
 ## Requirements
 

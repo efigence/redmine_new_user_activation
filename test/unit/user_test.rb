@@ -27,33 +27,33 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  def test_should_set_status_to_pending_with_given_activation_date
+    @user.activation_date = Time.now+1.month
+    @user.save
+
+    assert_equal User::STATUS_PENDING, @user.status
+  end
+
+  def test_should_set_status_to_active_without_given_activation_date
+    @user.save
+
+    assert_equal User::STATUS_ACTIVE, @user.status
+  end
+
   def test_should_modify_activation_date_for_user_with_pending_status
     @user.save
     @user.set_pending
-    @user.activation_date = '2015-07-19 20:57:52 UTC'
+    @user.activation_date = Date.today+1.week
 
-    assert_equal '2015-07-19 20:57:52 UTC', @user.activation_date.utc
+    assert_equal Date.today+1.week, @user.activation_date
   end
 
   def test_should_not_modify_activation_date_for_user_with_not_pending_status
     @user.save
-    @user.activation_date = "2015-07-19 22:57:52 +02:00"
+    @user.activation_date = Time.now
     @user.save
 
-    assert_equal "", @user.activation_date
-  end
-
-  def test_should_set_status_to_pending_with_given_activation_date
-      @user.activation_date = Time.now+1.month
-      @user.save
-
-      assert_equal 4, @user.status
-  end
-
-  def test_should_set_status_to_active_without_given_activation_date
-      @user.save
-
-      assert_equal 1, @user.status
+    assert_equal nil, @user.activation_date
   end
 
 end

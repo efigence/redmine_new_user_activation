@@ -4,7 +4,7 @@ class AccountTest < Redmine::IntegrationTest
   fixtures :users
 
   def setup
-    log_user("admin", "admin")
+    log_user("jsmith", "jsmith")
   end
 
   def test_hook_should_fetch_activation_date

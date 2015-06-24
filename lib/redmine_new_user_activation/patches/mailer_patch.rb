@@ -6,7 +6,7 @@ module RedmineNewUserActivation
           unloadable
 
           def account_information(user, password)
-            if user.status == User::STATUS_ACTIVE
+            if user.active?
               set_language_if_valid user.language
               @user = user
               @password = password

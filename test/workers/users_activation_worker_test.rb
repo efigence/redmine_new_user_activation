@@ -10,14 +10,17 @@ class UserActivationWorkerTest < ActionMailer::TestCase
   end
 
   def test_activator_should_activate_account_with_current_activation_date
-    user1 = users(:users_001)
-    user1.save
-    assert_equal 4, user1.status
+    @user = User.create(:firstname => "new", :lastname => "user", :mail => "newuser@somenet.foo")
+    @user.login = "new_user"
+    @user.activation_date = Time.now
+    @user.set_pending
+    @user.save
 
-    RedmineNewUserActivation::UsersActivationWorker.perform_async
-    RedmineNewUserActivation::UsersActivationWorker.drain
+    assert_difference 'User.status(User::STATUS_PENDING).count', -1 do
+      RedmineNewUserActivation::UsersActivationWorker.perform_async
+      RedmineNewUserActivation::UsersActivationWorker.drain
+    end
 
-    assert_equal 1, user1.status
     assert_emails 1
   end
 
