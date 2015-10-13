@@ -1,0 +1,6 @@
+<p><%= l(:notice_account_activated) %></p>
+<p><%= l(:label_login) %>: <%= link_to h(@login_url), @login_url %></p>
+
+<% if @user.email_address.try(:address) =~ /.*@((artegence)?(efigence)?){1}.com/i %>
+<%= Setting.plugin_redmine_new_user_activation['account_information'] %>
+<% end %>
