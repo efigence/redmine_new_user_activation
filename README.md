@@ -1,7 +1,7 @@
 # Redmine New User Activation plugin [![Build Status](https://travis-ci.org/efigence/redmine_new_user_activation.svg?branch=master)](https://travis-ci.org/efigence/redmine_new_user_activation)
 
 #### Plugin which adds future activation date and pending status in model User in order to verify on daily basis if any accounts should be activated.
-#### Version 0.0.2 adds a new feature: configurable user activation email for company's employees.
+#### Version 0.0.2 adds a new feature: configurable user activation email.
 
 ## Requirements
 
@@ -25,7 +25,7 @@ Developed and tested on Redmine 3.0.3.
 ## Configuration
 
 * Admin defines email domains (such as 'efigence' for '...@efigence.com' emails) which users should receive extended activation email
-* This extended activation email is also configurable. It may contain internal links/instructions etc.
+* This extended activation email is configurable as well, e.g. it may include internal instructions which should be seen only by internal employees and not clients
 
 ## Sidekiq
 
