@@ -1,6 +1,9 @@
 <%= l(:notice_account_activated) %>
 <%= l(:label_login) %>: <%= @login_url %>
 
-<% if @user.email_address.try(:address) =~ /.*@((artegence)?(efigence)?){1}.com/i %>
-<%= Setting.plugin_redmine_new_user_activation['account_information'] %>
+<% email_domains = Setting.plugin_redmine_new_user_activation['email_domains'].split(', ').join(')?(') %>
+<% @email_domains = /.*@((#{email_domains})?){1}.com/i %>
+
+<% if @user.email_address.try(:address) =~ @email_domains %>
+<%= Setting.plugin_redmine_new_user_activation['account_activated'] %>
 <% end %>

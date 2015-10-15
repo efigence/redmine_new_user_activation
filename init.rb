@@ -6,7 +6,8 @@ Redmine::Plugin.register :redmine_new_user_activation do
   url 'https://github.com/efigence/redmine_new_user_activation'
   author_url 'https://github.com/efigence'
 
-  settings :default => {'account_information' => ""}, :partial => 'settings/account_information_settings'
+  settings :default => {'account_activated' => ""}, :partial => 'settings/account_activated_settings'
+  settings :default => {'email_domains' => ""}, :partial => 'settings/account_activated_settings'
 
   ActionDispatch::Callbacks.to_prepare do
     require 'redmine_new_user_activation/hooks/activation_date'

@@ -15,7 +15,6 @@ module RedmineNewUserActivation
               :subject => l(:mail_subject_register, Setting.app_title)
             end
           end
-
         end
       end
     end

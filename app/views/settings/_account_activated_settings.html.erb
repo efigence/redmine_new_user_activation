@@ -1,0 +1,8 @@
+<%= error_messages_for 'account_activated' %>
+
+<h3><%= l(:label_account_activated_email) %></h3>
+<%= text_area_tag 'settings[account_activated]', @settings['account_activated'], rows: 8 %></p>
+<%= wikitoolbar_for 'settings_account_activated' %>
+<h3><%= l(:label_email_domains) %></h3>
+<%= text_field_tag 'settings[email_domains]', @settings['email_domains'] %></p>
+</div>
