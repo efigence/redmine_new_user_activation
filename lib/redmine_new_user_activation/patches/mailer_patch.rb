@@ -5,6 +5,8 @@ module RedmineNewUserActivation
         base.class_eval do
           unloadable
 
+          helper :users
+
           def account_information(user, password)
             if user.active?
               set_language_if_valid user.language

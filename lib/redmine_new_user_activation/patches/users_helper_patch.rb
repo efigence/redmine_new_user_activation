@@ -16,6 +16,12 @@ module RedmineNewUserActivation
               ["#{l(:status_pending)} (#{user_count_by_status[4].to_i})", '4']], selected.to_s)
           end
 
+          def email_domains
+            domains = Setting.plugin_redmine_new_user_activation['email_domains'].split(', ').join(')?(')
+            @email_domains = /.*@((#{domains}))./i
+            return @email_domains
+          end
+
         end
       end
     end

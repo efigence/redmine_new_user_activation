@@ -6,7 +6,7 @@ class MailerTest < ActionMailer::TestCase
     @user = User.new(:firstname => "new", :lastname => "one", :mail => "newone@somenet.foo")
     @user.login ="new_one"
     Setting.plugin_redmine_new_user_activation['account_activated'] = "This is additional text for testing"
-    Setting.plugin_redmine_new_user_activation['email_domains'] = "efigence"
+    Setting.plugin_redmine_new_user_activation['email_domains'] = "efigence, artegence"
   end
 
   def test_should_send_account_information_for_active_user
@@ -30,7 +30,7 @@ class MailerTest < ActionMailer::TestCase
 
   def test_should_sent_redmine_info_for_user_with_company_email
     user = @user
-    user.mail = "newone@efigence.com"
+    user.mail = "newone@artegence.com"
     user.save
 
     Mailer.account_activated(user).deliver_now

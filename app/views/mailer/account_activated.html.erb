@@ -1,9 +1,6 @@
 <p><%= l(:notice_account_activated) %></p>
 <p><%= l(:label_login) %>: <%= link_to h(@login_url), @login_url %></p>
 
-<% email_domains = Setting.plugin_redmine_new_user_activation['email_domains'].split(', ').join(')?(') %>
-<% @email_domains = /.*@((#{email_domains})?){1}.com/i %>
-
-<% if @user.email_address.try(:address) =~ @email_domains %>
-<%= Setting.plugin_redmine_new_user_activation['account_activated'] %>
+<% if @user.email_address.try(:address) =~ email_domains %>
+<p><%= Setting.plugin_redmine_new_user_activation['account_activated'] %></p>
 <% end %>

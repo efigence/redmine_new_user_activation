@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_new_user_activation do
   name 'Redmine New User Activation plugin'
   author 'Maria Syczewska'
   description 'This is a plugin for Redmine for implementing and managing user activation date'
-  version '0.0.1'
+  version '0.0.2'
   url 'https://github.com/efigence/redmine_new_user_activation'
   author_url 'https://github.com/efigence'
 
